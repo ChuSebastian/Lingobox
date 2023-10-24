@@ -1,2 +1,2 @@
-# Lingobox
-Proyecto de Ingenieria de Software - Lingobox
+# Lingovox
+Proyecto de Ingenieria de Software - Lingovox
