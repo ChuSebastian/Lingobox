@@ -43,6 +43,12 @@ La **Diarización** de Oradores es el proceso de dividir una grabación de audio
 
 Por todas estas razones utilizaremos este modelo modificado de Whisper AI a comparación del orginal.
 
+## Desventajas
+
+Por desgracia el modelo WhisperX a pesar que es más preciso en la transcripción y además sus transcripciones no estan desfasadas en el tiempo, no posee la propiedad multitarea de además de transcribir también poder traducir.
+
+A pesar de ello, esto no es una problemática al 100% ya que hay otras herramientas que nos van a ayudar para poder hacer traducciones eficientes.
+
 ## Notebook de prueba
 
 https://colab.research.google.com/drive/1Icqzys3HsONWE47GS-MbzKYZe5-YvhbK?authuser=0#scrollTo=U5giMZv5Uppm
