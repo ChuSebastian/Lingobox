@@ -9,7 +9,6 @@ OpenAI utilizó un modelo Transformer (2017) y una cantidad de 680 000 horas de 
 
 ![image](https://github.com/ChuSebastian/Lingovox/assets/83739305/a837c536-f565-443b-b613-8ffce1d57ebd)
 
-
 Una de las características más importantes de Whisper AI no es solo que es multilenguaje, sino que además es multitarea, pues no solo nos va a permitir transcribir nuestros audios, sino que además nos va a permitir traducir dichas transcripciones.
 
 ![image](https://github.com/ChuSebastian/Lingovox/assets/83739305/3fc6ef51-85f5-4fb0-9c76-7cbcfcdf7256)
@@ -43,6 +42,10 @@ La **Diarización** de Oradores es el proceso de dividir una grabación de audio
 ![image](https://github.com/ChuSebastian/Lingovox/assets/83739305/4fcd79d7-8b3c-4791-933a-42951618116f)
 
 Por todas estas razones utilizaremos este modelo modificado de Whisper AI a comparación del orginal.
+
+## Notebook de prueba
+
+https://colab.research.google.com/drive/1Icqzys3HsONWE47GS-MbzKYZe5-YvhbK?authuser=0#scrollTo=U5giMZv5Uppm
 
 ## Fuentes
 
