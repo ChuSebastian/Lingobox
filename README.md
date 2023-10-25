@@ -20,8 +20,32 @@ Una de las características más importantes de Whisper AI no es solo que es mul
 - https://stackoverflow.com/questions/73845566/openai-whisper-filenotfounderror-winerror-2-the-system-cannot-find-the-file
 - https://www.geeksforgeeks.org/how-to-install-ffmpeg-on-windows/
 
+# WhisperX
+
+Whisper es un modelo de reconocimiento automático de voz (ASR) desarrollado por OpenAI, entrenado en una amplia colección de grabaciones de audio variadas. Aunque ofrece transcripciones altamente precisas, las marcas de tiempo correspondientes se aplican a nivel de las frases habladas en lugar de a nivel de palabras, y pueden no ser exactas en varios segundos. Además, Whisper de OpenAI no tiene la capacidad incorporada de procesar varias transcripciones a la vez.
+
+El proyecto WhisperX actualmente es el mejor modelo de audio a texto del mercado, y lo mejor de todo es que es Oper Source.
+
+Han cogido el potentísimo modelo de transcripción de voz de OpenAI y han realizado los siguientes avances:
+
+- 👉 x70 más rápido que Whisper!
+- 👉 Te calcula timestamps por palabras (Alineación Forzada)!
+- 👉 Detección del habla (VAD) y diarización!
+- 👉 Alineaci[on forzada
+- 👉 Open source y fácil de instalar.
+
+La **Alineación Forzada** es el proceso en el cual las transcripciones escritas se alinean automáticamente con las grabaciones de audio, permitiendo una segmentación precisa a nivel de los sonidos individuales (fonemas).
+
+La **Detección de Actividad de Voz (VAD)** consiste en detectar si hay presencia o ausencia de habla humana en una grabación de audio.
+
+La **Diarización** de Oradores es el proceso de dividir una grabación de audio que contiene discurso humano en segmentos homogéneos, agrupados según la identidad de cada hablante en la conversación.
+
+![image](https://github.com/ChuSebastian/Lingovox/assets/83739305/4fcd79d7-8b3c-4791-933a-42951618116f)
+
+Por todas estas razones utilizaremos este modelo modificado de Whisper AI a comparación del orginal.
+
 ## Fuentes
 
 - https://github.com/openai/whisper/tree/main
-
+- https://github.com/m-bain/whisperX
 - Santana, Carlos. [DotCSV]. (2022, 13 de noviembre). Whisper, el OÍDO más POTENTE de la Inteligencia Artificial (y Open Source!) [Video]. YouTube. https://www.youtube.com/watch?v=JuMEmF-2FsA
