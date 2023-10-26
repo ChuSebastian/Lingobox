@@ -51,7 +51,7 @@ A pesar de ello, esto no es una problemática al 100% ya que hay otras herramien
 
 ## Notebook de prueba
 
-https://colab.research.google.com/drive/1Icqzys3HsONWE47GS-MbzKYZe5-YvhbK?authuser=0#scrollTo=U5giMZv5Uppm
+[https://colab.research.google.com/drive/1Icqzys3HsONWE47GS-MbzKYZe5-YvhbK?authuser=0#scrollTo=U5giMZv5Uppm](https://colab.research.google.com/drive/1fTwoUWYOVFRU4GIh61n0AVnuiHPJEge1?usp=sharing)
 
 ## Fuentes
 
