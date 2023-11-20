@@ -2,18 +2,7 @@ from fastapi import FastAPI, UploadFile, File, Form
 import shutil
 from fastapi.middleware.cors import CORSMiddleware
 import os
-
-from pydub import AudioSegment
 import json
-import whisperx
-import torch
-import moviepy.editor as mpy
-import subprocess
-import torch
-
-ruta_actual = os.getcwd()
-
-
 
 app = FastAPI()
 
@@ -26,30 +15,44 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.post("/metadata/")
-async def create_metadata(audio_file: UploadFile = File(...), metadata: str = Form(...)):
-    
-    '''################################################METODOS QUE SE LLAMAN CUANDO LE HACES CLICK AL BOTON SUBMIT##########################################################################'''
+def to_wav(user, project):
 
+    print("xd")
 
-    '''Creacion de las carpetas users, username, project, input, output. Ademas de generar los archivos info.json e insertar el archivo de audio dentro de la carpeta input'''
+def lingo_speech_to_text(user, project):
     
-    # metadata es un string tal que: {"user_name":"fernando","proyect_name":"proy1","input_language":"es","output_language":"en"}, necesito convertirlo a json:
+    print("xd2")
+
+def lingo_text_to_speech():
+    
+    print("xd3")
+
+def transcribe_audio(file_path):
+    with open(file_path, 'r') as archivo:
+        result = json.load(archivo)
+
+    transcriptions = []
+
+    for i, segment in enumerate(result['segments']):
+        speaker = result['segments'][i]['words'][0]['speaker']
+        transcription = f'{segment["start"]} - {segment["end"]}: {segment["text"]} - {speaker}'
+        transcriptions.append(transcription)
+
+    return transcriptions
+
+@app.post("/transcribe/")
+async def transcribe_audio_endpoint(audio_file: UploadFile = File(...), metadata: str = Form(...)):
+    
     metadata = eval(metadata)
-    
-    print(metadata["user_name"])
-    print(metadata["proyect_name"])
-    print(metadata["input_language"])
-    print(metadata["output_language"])
 
     # Crear el directorio users si no existe
     if not os.path.exists("users"):
         os.mkdir("users")
-
+    
     # Crear el directorio user_name si no existe dentro de users
     if not os.path.exists("users/" + metadata["user_name"]):
         os.mkdir("users/" + metadata["user_name"])
-
+    
     # Crear el directorio proyect_name si no existe dentro de user_name
     if not os.path.exists("users/" + metadata["user_name"] + "/" + metadata["proyect_name"]):
         os.mkdir("users/" + metadata["user_name"] + "/" + metadata["proyect_name"])
@@ -86,16 +89,19 @@ async def create_metadata(audio_file: UploadFile = File(...), metadata: str = Fo
     to_wav(metadata["user_name"], metadata["proyect_name"])
     #Transcripción y Audio Segmentation by Speaker (ambos dentro de la carpeta input)
     lingo_speech_to_text(metadata["user_name"], metadata["proyect_name"])
+    
 
+    # Ruta del archivo de transcripción
+    transcription_file_path = os.path.join(prev_path, "users", metadata["user_name"], metadata["proyect_name"], "input", "transcription.json")
 
-    '''################################################METODOS QUE SE LLAMAN CUANDO LE HACES CLICK AL BOTON TRADUCIR##########################################################################'''
+    # Transcribir el audio
+    transcriptions = transcribe_audio(transcription_file_path)
 
+    return {"transcriptions": transcriptions}
 
-    #Este metodo sera activado cuando le demos a traducir
-    lingo_text_to_speech()
+@app.post("/metadata/")
+async def create_metadata(audio_file: UploadFile = File(...), metadata: str = Form(...)):
 
-
-    # Resto del código para procesar los datos del formulario...
+    lingo_speech_to_text(metadata["user_name"], metadata["proyect_name"])
+    
     return {"filename": audio_file.filename, "metadata": metadata}
-
-
