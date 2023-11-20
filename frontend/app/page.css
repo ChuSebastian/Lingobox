@@ -1,0 +1,48 @@
+:root {
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  background-color: #20212a;
+  color: #ede6e2;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+form {
+  background-color: #343746;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
+}
+
+.title {
+  font-weight: bold;
+  color: #ff4a3b;
+  font-size: 2em;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.names h2, h2 {
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+input[type="text"], select, button, input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 0;
+  border-radius: 8px;
+  box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
+  background-color: #464a53;
+  box-sizing: border-box;
+  color: #fff;
+}
+
+button {
+  cursor: pointer;
+  background-color: #FF4A3B;
+  color: #fff;
+  font-size: 1em;
+  font-weight: bold;
+}

@@ -1,0 +1,31 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Caches
+*.cache
+*.pyc
+
+# Virtual Environments
+venv/
+env/
+
+
+# Node modules
+node_modules/
+
+# Logs
+logs
+*.log
+
+# Dependency directories
+jspm_packages/
+bower_components/
+
+# Output of build tools
+dist/
+build/
+
+
+/others
