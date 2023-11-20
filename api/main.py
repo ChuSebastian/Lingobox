@@ -50,19 +50,19 @@ async def transcribe_audio_endpoint(audio_file: UploadFile = File(...), metadata
         os.mkdir("users")
     
     # Crear el directorio user_name si no existe dentro de users
-    if not os.path.exists("users/" + metadata["user_name"]):
-        os.mkdir("users/" + metadata["user_name"])
+    if not os.path.exists("users/Manuel"):
+        os.mkdir("users/Manuel")
     
     # Crear el directorio proyect_name si no existe dentro de user_name
-    if not os.path.exists("users/" + metadata["user_name"] + "/" + metadata["proyect_name"]):
-        os.mkdir("users/" + metadata["user_name"] + "/" + metadata["proyect_name"])
+    if not os.path.exists("users/Manuel/Proyecto1"):
+        os.mkdir("users/Manuel/Proyecto1")
 
     # Dentro de proyect_name crear el directorio input si no existe
-    if not os.path.exists("users/" + metadata["user_name"] + "/" + metadata["proyect_name"] + "/input"):
-        os.mkdir("users/" + metadata["user_name"] + "/" + metadata["proyect_name"] + "/input")
+    if not os.path.exists("users/Manuel/Proyecto1/input"):
+        os.mkdir("users/Manuel/Proyecto1/input")
     
-    if not os.path.exists("users/" + metadata["user_name"] + "/" + metadata["proyect_name"] + "/output"):
-        os.mkdir("users/" + metadata["user_name"] + "/" + metadata["proyect_name"] + "/output")
+    if not os.path.exists("users/Manuel/Proyecto1/output"):
+        os.mkdir("users/users/Manuel/Proyecto1/output")
     
 
     # En input guardar el archivo de audio y un info.json con la metadata
@@ -72,27 +72,27 @@ async def transcribe_audio_endpoint(audio_file: UploadFile = File(...), metadata
     info_dict = {
         "lan_input": metadata["input_language"],
         "lan_output": metadata["output_language"],
-        "input_dir": os.path.join(prev_path, "users", metadata["user_name"], metadata["proyect_name"], "input", audio_file.filename)
+        "input_dir": os.path.join(prev_path, "users", "Manuel", "Proyecto1", "input", audio_file.filename)
     }
 
     # Escribir el diccionario en el archivo JSON
-    with open("users/" + metadata["user_name"] + "/" + metadata["proyect_name"] + "/input/info.json", "w") as f:
+    with open("users/users/Manuel/Proyecto1/input/info.json", "w") as f:
         json.dump(info_dict, f, indent=2)
 
     # Guardar el archivo de audio
-    with open("users/" + metadata["user_name"] + "/" + metadata["proyect_name"] + "/input/" + audio_file.filename, "wb") as buffer:
+    with open("users/users/Manuel/Proyecto1/input/" + audio_file.filename, "wb") as buffer:
         shutil.copyfileobj(audio_file.file, buffer)
 
     
     
     #convertir a audio wav
-    to_wav(metadata["user_name"], metadata["proyect_name"])
+    to_wav("Manuel", "Proyecto1")
     #Transcripción y Audio Segmentation by Speaker (ambos dentro de la carpeta input)
-    lingo_speech_to_text(metadata["user_name"], metadata["proyect_name"])
+    lingo_speech_to_text("Manuel", "Proyecto1")
     
 
     # Ruta del archivo de transcripción
-    transcription_file_path = os.path.join(prev_path, "users", metadata["user_name"], metadata["proyect_name"], "input", "transcription.json")
+    transcription_file_path = os.path.join(prev_path, "users", "Manuel", "Proyecto1", "input", "transcription.json")
 
     # Transcribir el audio
     transcriptions = transcribe_audio(transcription_file_path)
@@ -102,6 +102,6 @@ async def transcribe_audio_endpoint(audio_file: UploadFile = File(...), metadata
 @app.post("/metadata/")
 async def create_metadata(audio_file: UploadFile = File(...), metadata: str = Form(...)):
 
-    lingo_speech_to_text(metadata["user_name"], metadata["proyect_name"])
+    lingo_speech_to_text("Manuel", "Proyecto1")
     
     return {"filename": audio_file.filename, "metadata": metadata}
