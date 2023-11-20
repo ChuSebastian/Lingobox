@@ -8,7 +8,6 @@ function Page() {
     const [audio_file, set_audio_file] = useState(null); // audio file
     const [text, set_text] = useState('speech to text'); // text of the audio file (speech to text)
     const [audio_file_uploaded, set_audio_file_uploaded] = useState(false); // audio file uploaded
-    const [audio_file_translate, set_audio_file_translate] = useState(false); // audio file translate
 
     const handle_language_change = (event) => {
         set_language(event.target.value);
@@ -18,72 +17,63 @@ function Page() {
         const file = event.target.files[0]; // get the file
         set_audio_file(file); // set the file
         set_audio_file_uploaded(false); // set the audio_file_uploaded to false
-        set_audio_file_translate(false); // set the audio_file_is_loaded to false
     }
 
-    const handle_submit_upload = (event) => {
+    const handle_submit_upload = async (event) => {
         event.preventDefault();
         set_audio_file_uploaded(true); // set the audio_file_uploaded to true
-    }
-    useEffect(() => {
-        if (audio_file_uploaded) {
-            const formData = new FormData();
-            formData.append('audio_file', audio_file);
 
-            try {
-                const response = fetch('http://localhost:8000/upload/', {
-                    method: 'POST',
-                    body: formData,
-                });
-                if (!response.ok) {
-                    throw new Error('Error to send audio file');
-                }
-                // Update the text of the audio file (speech to text)
-                set_text(response.text);
-
-            } catch (error) {
-                console.error('Error:', error);
-            }
-        }
-    }, [audio_file_uploaded]);
-
-    const handle_submit_translate = async (event) => {
-        event.preventDefault();
-        
-        form = new FormData();
-        form.append('language', language);
-        form.append('audio_file', audio_file);
+        const formData = new FormData();
+        formData.append('audio_file', audio_file);
 
         try {
-            const response = await fetch('http://localhost:8000/translate/', {
+            const response = await fetch('http://localhost:8000/upload/', {
                 method: 'POST',
-                body: form,
+                body: formData,
             });
             if (!response.ok) {
-                throw new Error('Error to translate audio file');
+                throw new Error('Error to send audio file');
             }
-            const blob = await response.blob();
-
-            // Simulate a mouse click:
-            const url = URL.createObjectURL(blob);
-            const link = document.createElement('a');
-            link.href = url;
-            link.click();
-
-            set_audio_file_translate(true);
+            // Update the text of the audio file (speech to text)
+            const data = await response.json();
+            set_text(data.text_to_translate); // set the text of the audio file (speech to text)
         } catch (error) {
             console.error('Error:', error);
         }
     }
-    useEffect(() => {
-        if (audio_file_translate) { // reset the page
-            set_audio_file(null);
-            set_text('speech to text');
-            set_audio_file_uploaded(false);
-            set_audio_file_translate(false);
-            set_language('es');
+
+    const handle_submit_translate = async (event) => {
+        event.preventDefault();
+
+        if (audio_file_uploaded) { // if the audio file is uploaded
+            const form = new FormData();
+            form.append('language', language);
+            form.append('audio_file', audio_file);
+
+            try {
+                const response = await fetch('http://localhost:8000/translate/', {
+                    method: 'POST',
+                    body: form,
+                });
+                if (!response.ok) {
+                    throw new Error('Error to translate audio file');
+                }
+                // "Download" the audio file translated
+                const blob = await response.blob();
+
+                // Simulate a mouse click:
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', 'translated_audio.wav');
+                link.click();
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        } else {
+            alert('You need to upload an audio file first');
         }
-    }, [audio_file_translate]);
+    }
 
     return (
         <div>

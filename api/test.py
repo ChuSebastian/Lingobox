@@ -22,7 +22,7 @@ async def upload_audio(audio_file: UploadFile = File(...)):
         file_path = f"./{audio_file.filename}"
         with open(file_path, "wb") as buffer:
             shutil.copyfileobj(audio_file.file, buffer) # Save file in server
-        return {"filename": audio_file.filename} # Return filename (test)
+        return {"text_to_translate": audio_file.filename} # Return filename (test)
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
@@ -37,6 +37,6 @@ async def translate_audio(audio_file: UploadFile = File(...), language: str = Fo
 
         with open(file_path, "wb") as buffer:
             buffer.write(contents)
-        return FileResponse(output_file_name, media_type="audio/wav") # Return file (test)
+        return FileResponse(file_path, media_type="audio/wav") # Return file (test)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
