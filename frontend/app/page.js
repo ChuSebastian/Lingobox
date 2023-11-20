@@ -87,31 +87,34 @@ function Page() {
     }, [audio_file_translate]);
 
     return (
-        <div>
-            <header> {/* title */}
-                <h1>Lingovox</h1>
+        <div className="container">
+            <header>
+                <h1 className="title">Lingovox</h1>
             </header>
-            <main> {/* forms */}
-                <form className="upload-class" onSubmit={handle_submit_upload}>
-                    <input type="file"
-                        accept="audio/*"
-                        onChange={handle_audio_upload}
-                    />
+            
+            <form className="upload" onSubmit={handle_submit_upload}>
+            <div className="uploadArea">
+                <input type="file"
+                    accept="audio/*"
+                    onChange={handle_audio_upload}
+                />
+                <button type="submit">Upload</button>
+            </div>
+                <div className="transcription">
                     <textarea name="text"
                         placeholder={text} readOnly>
                     </textarea>
-                    <button type="submit">Upload</button>
-                </form>
-                <form className="translate-class" onSubmit={handle_submit_translate}>
-                    <select value={language} onChange={handle_language_change}>
-                        <option value="es">Spanish</option>
-                        <option value="en">English</option>
-                        <option value="pt">Portuguese</option>
-                        <option value="fr">French</option>
-                    </select>
-                    <button type="submit">Translate</button>
-                </form>
-            </main>
+                </div>
+            </form>
+            <form className="play" onSubmit={handle_submit_translate}>
+                <select className="combo" value={language} onChange={handle_language_change}>
+                    <option value="es">Spanish</option>
+                    <option value="en">English</option>
+                    <option value="pt">Portuguese</option>
+                    <option value="fr">French</option>
+                </select>
+                <button className="translateButton"type="submit">Translate</button>
+            </form>
         </div>
     );
 }
