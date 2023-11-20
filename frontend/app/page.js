@@ -55,21 +55,20 @@ function Page() {
         form.append('audio_file', audio_file);
 
         try {
-            const response = await fetch('http://localhost:8000/play/', {
+            const response = await fetch('http://localhost:8000/translate/', {
                 method: 'POST',
                 body: form,
             });
             if (!response.ok) {
                 throw new Error('Error to translate audio file');
             }
-            const output_audio_file = response.output_audio_file
-            const url = URL.createObjectURL(output_audio_file);
+            const blob = await response.blob();
 
             // Simulate a mouse click:
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'translated_audio_file'+language+output_audio_file.type;
-            a.click();
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.click();
 
             set_audio_file_translate(true);
         } catch (error) {
