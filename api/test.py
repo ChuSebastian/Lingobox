@@ -40,3 +40,4 @@ async def translate_audio(audio_file: UploadFile = File(...), language: str = Fo
         return FileResponse(file_path, media_type="audio/wav") # Return file (test)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
