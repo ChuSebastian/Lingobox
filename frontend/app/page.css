@@ -1,48 +1,86 @@
 :root {
-  display: grid;
-  place-items: center;
-  height: 100vh;
-  background-color: #20212a;
-  color: #ede6e2;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #20212a;
+    color: #ede6e2;
+    font-family: 'Work Sans', sans-serif;
 }
 
-form {
-  background-color: #343746;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
+.container {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* 2/3 and 1/3 of the screen size */
+    grid-template-rows: 1fr 1fr 6fr; /* 1/5, 1/5, and 3/5 of the screen size */
+    height: 100vh; /* 100% of the viewport height */
+    gap: 10px; /* Set the gap between grid items */
+    padding-left: 10%;
+    padding-right: 10%;
 }
 
 .title {
-  font-weight: bold;
-  color: #ff4a3b;
-  font-size: 2em;
-  margin-bottom: 20px;
-  text-align: center;
+    color: #FF4A3B;
+    font-size: 5vw;
+    text-transform: uppercase;
+    text-align: right;
+    line-height: 1;
+    
+}
+.upload{
+    grid-column: 1;
+    grid-row: 2;
+}
+.uploadArea{
+    display: flex;
+    gap: 8%;
+}
+.play {
+    grid-column: 2;
+    grid-row: 2 / span 2    ;
+}
+.transcription {
+    grid-column: 1;
+    grid-row: 3;
+    width: 100%;
+    height: 400%;
+    border-radius: 10px;
+    box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
+    background-color: #464a53;
 }
 
-.names h2, h2 {
-  margin: 0;
-  margin-bottom: 10px;
+.transcription textarea {
+    width: 100%; /* Make the textarea width 100% of its container */
+    height: 100%; /* Make the textarea height 100% of its container */
+    border: 0;
+    background-color: transparent; /* Transparent background */
+    color: #fff; /* White text color */
+    box-sizing: border-box;
+}   
+.play {
+    grid-column: 2;
+    grid-row: 2 / span 2; /* Occupy the second column and both rows */
+    padding-top: 17%;
+    padding-left: 10%;
 }
 
 input[type="text"], select, button, input[type="file"] {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 0;
-  border-radius: 8px;
-  box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
-  background-color: #464a53;
-  box-sizing: border-box;
-  color: #fff;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 0;
+    border-radius: 8px;
+    box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
+    background-color: #464a53;
+    box-sizing: border-box;
+    color: #fff;
 }
-
+.combo{
+    width: 100%;
+}
+.translateButton{
+    width: 100%;
+}
 button {
-  cursor: pointer;
-  background-color: #FF4A3B;
-  color: #fff;
-  font-size: 1em;
-  font-weight: bold;
+    cursor: pointer;
+    background-color: #FF4A3B;
+    color: #fff;
+    font-size: 2em;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 10px;
 }
